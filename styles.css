@@ -1,0 +1,240 @@
+/* CSS для Clicker Game */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #2c2f33; /* Темный фон */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #2c2f33, #1a1d23); /* Градиент фона */
+}
+
+.game-container {
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 400px;
+    background: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    z-index: 1; /* Добавляем z-index для видимости */
+}
+
+.click-area-container {
+    position: relative;
+}
+
+.click-area {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #444; /* Темный фон кнопки */
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none; /* Удаляем границу */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Свечение */
+}
+
+.click-area:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Увеличиваем свечение при наведении */
+}
+
+.click-area:active {
+    transform: rotate(10deg) scale(0.9); /* Анимация при нажатии */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Возвращаем свечение */
+}
+
+.click-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.mansur-click-image {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Сдвигаем Mansur ближе к кнопке */
+    transform: translateY(-50%);
+    width: 180px; /* Увеличиваем размер Mansur */
+    height: 180px;
+    animation: pulse 2s infinite; /* Добавляем анимацию пульса */
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateY(-50%) scale(1);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.1);
+    }
+    100% {
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #66ccff; /* Цвет пузыря */
+    cursor: pointer;
+    background-image: url('textures/bubble.png');
+    background-size: cover;
+    animation: bubble-pulse 2s infinite; /* Добавляем анимацию пульса для пузыря */
+}
+
+@keyframes bubble-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bubble::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('textures/money.png');
+    background-size: cover;
+}
+
+.tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tablinks {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 5px;
+    outline: none; /* Удаляем выделение */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
+}
+
+.tablinks.active {
+    background-color: #555;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Увеличиваем свечение при активации */
+}
+
+.tablinks:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Увеличиваем свечение при наведении */
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.tabcontent.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+
+.upgrade-container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    overflow-y: auto;
+    max-height: 80vh; /* Ограничиваем высоту */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
+}
+
+.upgrade-card {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
+}
+
+.upgrade-image {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.upgrade-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #555; /* Темный фон кнопки */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+    outline: none; /* Удаляем выделение */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
+}
+
+.upgrade-button:hover {
+    background-color: #666; /* Темный фон при наведении */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Увеличиваем свечение при наведении */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 3; /* Увеличиваем z-index для видимости */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
+}
+
+.close-button:hover {
+    background-color: #666;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Увеличиваем свечение при наведении */
+}
+
+.money-image {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
