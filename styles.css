@@ -268,9 +268,9 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
-    z-index: 3; /* Увеличиваем z-index для видимости */
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
+    z-index: 2; /* Добавляем z-index для видимости */
 }
+
 
 .close-button:hover {
     background-color: #666;
