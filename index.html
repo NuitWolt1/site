@@ -14,7 +14,7 @@
     </div>
 
     <!-- Основной контент -->
-    <div id="game-container" class="game-container">
+    <div id="game-container" class="game-container" style="display: none;">
         <div class="click-area-container">
             <div id="click-area" class="click-area">
                 <img src="textures/click.png" alt="Click Me!" class="click-image">
@@ -33,7 +33,34 @@
     <div id="upgrades" class="tabcontent full-screen">
         <button id="close-upgrades" class="close-button">X</button>
         <div class="upgrade-container">
-            <!-- Ваши улучшения -->
+            <div class="upgrade-card">
+                <img src="textures/upgrade1.png" alt="Upgrade 1" class="upgrade-image">
+                <h3>Прокачка клика</h3>
+                <p>Увеличивает монеты за клик на 1.</p>
+                <p>Level: <span id="upgrade1-level">0</span></p>
+                <button id="upgrade1-button" class="upgrade-button">Upgrade (Cost: 10 coins)</button>
+            </div>
+            <div class="upgrade-card">
+                <img src="textures/upgrade2.png" alt="Upgrade 2" class="upgrade-image">
+                <h3>Автоклик</h3>
+                <p>Добавляет 5 монет каждую секунду.</p>
+                <p>Level: <span id="upgrade2-level">0</span></p>
+                <button id="upgrade2-button" class="upgrade-button">Upgrade (Cost: 50 coins)</button>
+            </div>
+            <div class="upgrade-card">
+                <img src="textures/upgrade3.png" alt="Upgrade 3" class="upgrade-image">
+                <h3>Бустер клика</h3>
+                <p>Увеличивает монеты за клик на 10.</p>
+                <p>Level: <span id="upgrade3-level">0</span></p>
+                <button id="upgrade3-button" class="upgrade-button">Upgrade (Cost: 100 coins)</button>
+            </div>
+            <div class="upgrade-card">
+                <img src="textures/upgrade4.png" alt="Upgrade 4" class="upgrade-image">
+                <h3>Ускорение автоклика</h3>
+                <p>Увеличивает монеты от автоклика на 20.</p>
+                <p>Level: <span id="upgrade4-level">0</span></p>
+                <button id="upgrade4-button" class="upgrade-button">Upgrade (Cost: 200 coins)</button>
+            </div>
         </div>
     </div>
 
