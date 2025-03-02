@@ -31,7 +31,8 @@ function updateCoinCount() {
 }
 
 // Событие клика по области
-clickArea.addEventListener('touchstart', () => {
+clickArea.addEventListener('touchstart', (e) => {
+    e.preventDefault(); // Предотвращаем зум при быстром клике
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
