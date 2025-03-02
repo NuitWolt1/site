@@ -31,6 +31,18 @@ function updateCoinCount() {
 }
 
 // Событие клика по области
+clickArea.addEventListener('touchstart', () => {
+    coins += coinsPerClick; // Монеты за клик
+    updateCoinCount();
+    saveData();
+
+    // Анимация Mansur
+    mansurClickImage.style.left = '10px';
+    setTimeout(() => {
+        mansurClickImage.style.left = '0px';
+    }, 200);
+});
+
 clickArea.addEventListener('click', () => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
