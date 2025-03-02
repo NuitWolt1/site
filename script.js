@@ -219,5 +219,22 @@ function loadData() {
 
 loadData();
 
+// Предотвращаем двойной тап для увеличения
+document.addEventListener('touchstart', function preventZoom(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault(); // Отключаем зум при нескольких касаниях
+    }
+}, { passive: false });
+
+// Отключаем зум при двойном тапе
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(event) {
+    const now = new Date().getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault(); // Отключаем двойной тап
+    }
+    lastTouchEnd = now;
+}, false);
+
 // Создаем пузыри каждые 25 секунд
 setInterval(createBubble, 25000);
