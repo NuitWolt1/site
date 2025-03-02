@@ -24,6 +24,11 @@ const upgrade3LevelElement = document.getElementById('upgrade3-level');
 const upgrade4LevelElement = document.getElementById('upgrade4-level');
 const closeUpgradesButton = document.getElementById('close-upgrades');
 const bubbleContainer = document.getElementById('bubble-container');
+const backgroundMusic = document.getElementById('background-music');
+const clickSound = document.getElementById('click-sound');
+const playButton = document.getElementById('play-button');
+const gameContainer = document.getElementById('game-container');
+const loadingScreen = document.getElementById('loading-screen');
 
 // Функция обновления отображения монет
 function updateCoinCount() {
@@ -36,6 +41,7 @@ clickArea.addEventListener('touchstart', (e) => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
+    clickSound.play(); // Проигрываем звук клика
 
     // Анимация Mansur
     mansurClickImage.style.left = '10px';
@@ -48,6 +54,7 @@ clickArea.addEventListener('click', () => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
+    clickSound.play(); // Проигрываем звук клика
 
     // Анимация Mansur
     mansurClickImage.style.left = '10px';
@@ -231,6 +238,13 @@ function loadData() {
 }
 
 loadData();
+
+// Событие клика по кнопке "Играть"
+playButton.addEventListener('click', () => {
+    loadingScreen.style.display = 'none';
+    gameContainer.style.display = 'block';
+    backgroundMusic.play(); // Включаем фоническую музыку
+});
 
 // Предотвращаем двойной тап для увеличения
 document.addEventListener('touchstart', function preventZoom(event) {
