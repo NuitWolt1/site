@@ -13,7 +13,7 @@ let bonusCost = 1000; // Стоимость бонуса
 
 const coinCountElement = document.getElementById('coin-count');
 const clickArea = document.getElementById('click-area');
-const mansurClickImage = document.querySelector('.mansur-click-image');
+const characterImage = document.getElementById('character-image');
 const upgrade1Button = document.getElementById('upgrade1-button');
 const upgrade2Button = document.getElementById('upgrade2-button');
 const upgrade3Button = document.getElementById('upgrade3-button');
@@ -24,41 +24,16 @@ const upgrade3LevelElement = document.getElementById('upgrade3-level');
 const upgrade4LevelElement = document.getElementById('upgrade4-level');
 const closeUpgradesButton = document.getElementById('close-upgrades');
 const bubbleContainer = document.getElementById('bubble-container');
-const backgroundMusic1 = new Audio('audio/background.mp3'); // Первый трек на фоне
-const backgroundMusic2 = new Audio('audio/background1.mp3'); // Второй трек на фоне
-const clickSoundPool = []; // Пул звуков кликов
-
-// Инициализация пула звуков кликов (для предотвращения перекрытия)
-for (let i = 0; i < 10; i++) {
-    const clickSoundInstance = new Audio('audio/click.mp3');
-    clickSoundPool.push(clickSoundInstance);
-}
-
-// Функция для воспроизведения звука клика из пула
-function playClickSound() {
-    for (let sound of clickSoundPool) {
-        if (sound.paused) {
-            sound.currentTime = 0;
-            sound.play();
-            break;
-        }
-    }
-}
-
-// Функция для воспроизведения фонов музыки по очереди
-function playBackgroundMusic() {
-    backgroundMusic1.volume = 0.5;
-    backgroundMusic2.volume = 0.5;
-
-    backgroundMusic1.play();
-    backgroundMusic1.addEventListener('ended', () => {
-        backgroundMusic2.play();
-    });
-
-    backgroundMusic2.addEventListener('ended', () => {
-        backgroundMusic1.play();
-    });
-}
+const backgroundMusic = document.getElementById('background-music');
+const clickSound = document.getElementById('click-sound');
+const playButton = document.getElementById('play-button');
+const gameContainer = document.getElementById('game-container');
+const loadingScreen = document.getElementById('loading-screen');
+const bobikButton = document.getElementById('bobik-button');
+const slavaButton = document.getElementById('slava-button');
+const genkaButton = document.getElementById('genka-button');
+const mansurButton = document.getElementById('mansur-button');
+const closeCharactersButton = document.getElementById('close-characters');
 
 // Функция обновления отображения монет
 function updateCoinCount() {
@@ -71,12 +46,12 @@ clickArea.addEventListener('touchstart', (e) => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
-    playClickSound(); // Проигрываем звук клика
+    clickSound.play(); // Проигрываем звук клика
 
-    // Анимация Mansur
-    mansurClickImage.style.left = '10px';
+    // Анимация персонажа
+    characterImage.style.left = '10px';
     setTimeout(() => {
-        mansurClickImage.style.left = '0px';
+        characterImage.style.left = '0px';
     }, 200);
 });
 
@@ -84,12 +59,12 @@ clickArea.addEventListener('click', () => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
-    playClickSound(); // Проигрываем звук клика
+    clickSound.play(); // Проигрываем звук клика
 
-    // Анимация Mansur
-    mansurClickImage.style.left = '10px';
+    // Анимация персонажа
+    characterImage.style.left = '10px';
     setTimeout(() => {
-        mansurClickImage.style.left = '0px';
+        characterImage.style.left = '0px';
     }, 200);
 });
 
@@ -162,8 +137,31 @@ document.getElementById('bonus-button').addEventListener('click', () => {
 });
 
 // Событие клика по кнопке закрытия вкладки улучшений
-document.getElementById('close-upgrades').addEventListener('click', function() {
+closeUpgradesButton.addEventListener('click', function() {
     document.getElementById('upgrades').style.display = 'none';
+});
+
+// Событие клика по кнопке выбора персонажа Бобик
+bobikButton.addEventListener('click', () => {
+    characterImage.src = 'characters/bobik.png';
+});
+
+// Событие клика по кнопке выбора персонажа Генка
+genkaButton.addEventListener('click', () => {
+    characterImage.src = 'characters/genka.png';
+});
+
+// Событие клика по кнопке выбора персонажа Мансура
+mansurButton.addEventListener('click', () => {
+    characterImage.src = 'characters/mansur.png';
+});
+// Событие клика по кнопке выбора персонажа Генка
+slavaButton.addEventListener('click', () => {
+    characterImage.src = 'characters/slava.png';
+});
+// Событие клика по кнопке закрытия вкладки персонажей
+closeCharactersButton.addEventListener('click', function() {
+    document.getElementById('characters').style.display = 'none';
 });
 
 // Функция создания пузыря
@@ -270,10 +268,10 @@ function loadData() {
 loadData();
 
 // Событие клика по кнопке "Играть"
-document.getElementById('play-button').addEventListener('click', () => {
-    document.getElementById('loading-screen').style.display = 'none';
-    document.getElementById('game-container').style.display = 'block';
-    playBackgroundMusic(); // Включаем фоническую музыку
+playButton.addEventListener('click', () => {
+    loadingScreen.style.display = 'none';
+    gameContainer.style.display = 'block';
+    backgroundMusic.play(); // Включаем фоническую музыку
 });
 
 // Предотвращаем двойной тап для увеличения

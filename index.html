@@ -19,7 +19,7 @@
             <div id="click-area" class="click-area">
                 <img src="textures/click.png" alt="Click Me!" class="click-image">
             </div>
-            <img src="textures/mansur.png" alt="Mansur" class="mansur-click-image">
+            <img id="character-image" src="characters/bobik.png" alt="Mansur" class="mansur-click-image">
         </div>
         <p>Coins: <span id="coin-count">0</span> <img src="textures/money.png" alt="Money" class="money-image"></p>
         <div id="bubble-container"></div>
@@ -27,6 +27,7 @@
 
     <div class="tabs">
         <button class="tablinks" onclick="openTab(event, 'upgrades')">Улучшения</button>
+        <button class="tablinks" onclick="openTab(event, 'characters')">Персонажи</button>
         <button class="tablinks" onclick="openTab(event, 'bonuses')">Бонусы</button>
     </div>
 
@@ -63,6 +64,34 @@
             </div>
         </div>
     </div>
+
+<!-- Вкладка персонажей -->
+<div id="characters" class="tabcontent full-screen">
+    <button id="close-characters" class="close-button">X</button>
+    <div class="character-container">
+        <div class="character-card">
+            <img src="characters/bobik.png" alt="Бобик" class="character-image">
+            <h3>Бабиджон</h3>
+            <button id="bobik-button" class="character-button">Выбрать</button>
+        </div>
+        <div class="character-card">
+            <img src="characters/mansur.png" alt="Мансур" class="character-image">
+            <h3>Мансур</h3>
+            <button id="mansur-button" class="character-button">Выбрать</button>
+        </div>
+        <div class="character-card">
+            <img src="characters/slava.png" alt="Спичка" class="character-image">
+            <h3>Спичка</h3>
+            <button id="slava-button" class="character-button">Выбрать</button>
+        </div>
+        <div class="character-card">
+            <img src="characters/genka.png" alt="Генка" class="character-image">
+            <h3>Генка</h3>
+            <button id="genka-button" class="character-button">Выбрать</button>
+        </div>
+    </div>
+</div>
+
 
     <div id="bonuses" class="tabcontent">
         <h2>Бонусы</h2>

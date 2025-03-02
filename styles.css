@@ -61,7 +61,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #fff;
     z-index: 1; /* Добавляем z-index для видимости */
-    display: none; /* Сначала скрыто */
 }
 
 .click-area-container {
@@ -102,9 +101,9 @@ body {
 .mansur-click-image {
     position: absolute;
     top: 50%;
-    left: 10px; /* Сдвигаем Mansur ближе к кнопке */
+    left: 10px; /* Сдвигаем персонажа ближе к кнопке */
     transform: translateY(-50%);
-    width: 180px; /* Увеличиваем размер Mansur */
+    width: 180px; /* Увеличиваем размер персонажа */
     height: 180px;
     animation: pulse 2s infinite; /* Добавляем анимацию пульса */
 }
@@ -268,9 +267,9 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
-    z-index: 2; /* Добавляем z-index для видимости */
+    z-index: 3; /* Увеличиваем z-index для видимости */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Добавляем свечение */
 }
-
 
 .close-button:hover {
     background-color: #666;
@@ -281,4 +280,22 @@ body {
     width: 20px;
     height: 20px;
     margin-left: 5px;
+}
+
+.character-image {
+    max-width: 50px; /* Уменьшаем размер изображения персонажа */
+    max-height: 50px; /* Уменьшаем размер изображения персонажа */
+    object-fit: cover; /* Обрезаем изображение, чтобы сохранить пропорции */
+}
+
+body {
+    -webkit-user-select: none; /* Отключает выделение текста на iOS */
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation; /* Отключает нежелательные жесты */
+}
+
+button {
+    outline: none; /* Убираем синий контур вокруг кнопок */
+    -webkit-tap-highlight-color: transparent; /* Убираем серый фон при нажатии */
 }
