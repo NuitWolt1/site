@@ -24,11 +24,41 @@ const upgrade3LevelElement = document.getElementById('upgrade3-level');
 const upgrade4LevelElement = document.getElementById('upgrade4-level');
 const closeUpgradesButton = document.getElementById('close-upgrades');
 const bubbleContainer = document.getElementById('bubble-container');
-const backgroundMusic = document.getElementById('background-music');
-const clickSound = document.getElementById('click-sound');
-const playButton = document.getElementById('play-button');
-const gameContainer = document.getElementById('game-container');
-const loadingScreen = document.getElementById('loading-screen');
+const backgroundMusic1 = new Audio('audio/background.mp3'); // Первый трек на фоне
+const backgroundMusic2 = new Audio('audio/background1.mp3'); // Второй трек на фоне
+const clickSoundPool = []; // Пул звуков кликов
+
+// Инициализация пула звуков кликов (для предотвращения перекрытия)
+for (let i = 0; i < 10; i++) {
+    const clickSoundInstance = new Audio('audio/click.mp3');
+    clickSoundPool.push(clickSoundInstance);
+}
+
+// Функция для воспроизведения звука клика из пула
+function playClickSound() {
+    for (let sound of clickSoundPool) {
+        if (sound.paused) {
+            sound.currentTime = 0;
+            sound.play();
+            break;
+        }
+    }
+}
+
+// Функция для воспроизведения фонов музыки по очереди
+function playBackgroundMusic() {
+    backgroundMusic1.volume = 0.5;
+    backgroundMusic2.volume = 0.5;
+
+    backgroundMusic1.play();
+    backgroundMusic1.addEventListener('ended', () => {
+        backgroundMusic2.play();
+    });
+
+    backgroundMusic2.addEventListener('ended', () => {
+        backgroundMusic1.play();
+    });
+}
 
 // Функция обновления отображения монет
 function updateCoinCount() {
@@ -41,7 +71,7 @@ clickArea.addEventListener('touchstart', (e) => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
-    clickSound.play(); // Проигрываем звук клика
+    playClickSound(); // Проигрываем звук клика
 
     // Анимация Mansur
     mansurClickImage.style.left = '10px';
@@ -54,7 +84,7 @@ clickArea.addEventListener('click', () => {
     coins += coinsPerClick; // Монеты за клик
     updateCoinCount();
     saveData();
-    clickSound.play(); // Проигрываем звук клика
+    playClickSound(); // Проигрываем звук клика
 
     // Анимация Mansur
     mansurClickImage.style.left = '10px';
@@ -240,10 +270,10 @@ function loadData() {
 loadData();
 
 // Событие клика по кнопке "Играть"
-playButton.addEventListener('click', () => {
-    loadingScreen.style.display = 'none';
-    gameContainer.style.display = 'block';
-    backgroundMusic.play(); // Включаем фоническую музыку
+document.getElementById('play-button').addEventListener('click', () => {
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+    playBackgroundMusic(); // Включаем фоническую музыку
 });
 
 // Предотвращаем двойной тап для увеличения
