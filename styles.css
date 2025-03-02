@@ -9,6 +9,49 @@ body {
     background-image: linear-gradient(to bottom, #2c2f33, #1a1d23); /* Градиент фона */
 }
 
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading-screen h1 {
+    font-size: 48px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.play-button {
+    padding: 10px 20px;
+    font-size: 24px;
+    color: #fff;
+    background-color: #555; /* Темный фон кнопки */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.play-button:hover {
+    background-color: #666; /* Темный фон при наведении */
+}
+
 .game-container {
     margin: 50px auto;
     padding: 20px;
@@ -18,6 +61,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #fff;
     z-index: 1; /* Добавляем z-index для видимости */
+    display: none; /* Сначала скрыто */
 }
 
 .click-area-container {
@@ -25,7 +69,6 @@ body {
 }
 
 .click-area {
-    pointer-events: auto;
     display: inline-block;
     margin: 20px 0;
     padding: 20px;
@@ -238,16 +281,4 @@ body {
     width: 20px;
     height: 20px;
     margin-left: 5px;
-}
-
-body {
-    -webkit-user-select: none; /* Отключает выделение текста на iOS */
-    -ms-user-select: none;
-    user-select: none;
-    touch-action: manipulation; /* Отключает нежелательные жесты */
-}
-
-button {
-    outline: none; /* Убираем синий контур вокруг кнопок */
-    -webkit-tap-highlight-color: transparent; /* Убираем серый фон при нажатии */
 }
