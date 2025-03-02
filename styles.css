@@ -238,3 +238,15 @@ body {
     height: 20px;
     margin-left: 5px;
 }
+
+body {
+    -webkit-user-select: none; /* Отключает выделение текста на iOS */
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation; /* Отключает нежелательные жесты */
+}
+
+button {
+    outline: none; /* Убираем синий контур вокруг кнопок */
+    -webkit-tap-highlight-color: transparent; /* Убираем серый фон при нажатии */
+}
