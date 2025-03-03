@@ -31,6 +31,8 @@ const gameContainer = document.getElementById('game-container');
 const loadingScreen = document.getElementById('loading-screen');
 const bobikButton = document.getElementById('bobik-button');
 const slavaButton = document.getElementById('slava-button');
+const vitaButton = document.getElementById('vita-button');
+const yasenButton = document.getElementById('yasen-button');
 const genkaButton = document.getElementById('genka-button');
 const mansurButton = document.getElementById('mansur-button');
 const closeCharactersButton = document.getElementById('close-characters');
@@ -159,10 +161,19 @@ mansurButton.addEventListener('click', () => {
 slavaButton.addEventListener('click', () => {
     characterImage.src = 'characters/slava.png';
 });
+// Событие клика по кнопке выбора персонажа Генка
+yasenButton.addEventListener('click', () => {
+    characterImage.src = 'characters/yasen.png';
+});
+// Событие клика по кнопке выбора персонажа Генка
+vitaButton.addEventListener('click', () => {
+    characterImage.src = 'characters/vita.png';
+});
 // Событие клика по кнопке закрытия вкладки персонажей
 closeCharactersButton.addEventListener('click', function() {
     document.getElementById('characters').style.display = 'none';
 });
+
 
 // Функция создания пузыря
 function createBubble() {
