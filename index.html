@@ -1,116 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Clicker Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#11142b">
+  <meta name="description" content="Mansur Clicker — мемный мультяшный кликер с персонажами, престижем, заданиями, достижениями и событиями.">
+  <title>Mansur Clicker</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Заставка -->
-    <div id="loading-screen" class="full-screen">
-        <h1>Clicker Game</h1>
-        <button id="play-button" class="play-button">Играть</button>
+  <div id="boot" class="boot-screen">
+    <div class="boot-card">
+      <div class="logo-badge">M</div>
+      <div class="tiny-label">УЛЬТРА-РЕЛИЗ</div>
+      <h1>Mansur Clicker</h1>
+      <p>Кликай. Ломай экономику. Уважай Мансура.</p>
+      <button id="playButton" class="btn btn-primary btn-xl">ВОЙТИ В ХАОС ▶</button>
+      <div class="boot-chips"><span>🔥 Комбо</span><span>🎁 Ивенты</span><span>♻️ Престиж</span><span>📱 Mobile</span></div>
     </div>
+  </div>
 
-    <!-- Основной контент -->
-    <div id="game-container" class="game-container" style="display: none;">
-        <div class="click-area-container">
-            <div id="click-area" class="click-area">
-                <img src="textures/click.png" alt="Click Me!" class="click-image">
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="brand"><div class="logo-badge small">M</div><div><b>Mansur Clicker</b><small id="playerTitle">Локальный легендос</small></div></div>
+      <div class="top-actions">
+        <button class="icon-btn" data-panel="settings" aria-label="Настройки">⚙️</button>
+        <button id="muteButton" class="icon-btn" aria-label="Звук">🔊</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="stats-grid">
+        <div class="stat-card main-stat"><div class="stat-emoji">🪙</div><div><span>Мансур-коины</span><strong id="coins">0</strong><small>всего заработано: <b id="totalCoins">0</b></small></div></div>
+        <div class="stat-card"><span>За клик</span><strong id="clickPower">1</strong><small>крит: <b id="critChance">5%</b></small></div>
+        <div class="stat-card"><span>В секунду</span><strong id="perSecond">0</strong><small>множитель: <b id="globalMultiplier">x1.00</b></small></div>
+        <div class="stat-card"><span>Кристаллы</span><strong id="crystals">0</strong><small>престиж: <b id="prestigeCount">0</b></small></div>
+      </section>
+
+      <section class="level-bar card">
+        <div class="level-head"><b>Уровень <span id="level">1</span></b><span id="xpText">0 / 100 XP</span></div>
+        <div class="progress"><div id="xpBar" class="fill"></div></div>
+      </section>
+
+      <nav class="nav card" aria-label="Разделы">
+        <button class="nav-btn active" data-tab="home">🏠 <span>Игра</span></button>
+        <button class="nav-btn" data-tab="upgrades">🧰 <span>Прокачка</span></button>
+        <button class="nav-btn" data-tab="quests">🎯 <span>Задания</span></button>
+        <button class="nav-btn" data-tab="collection">👑 <span>Коллекция</span></button>
+        <button class="nav-btn" data-tab="achievements">🏆 <span>Достижения</span></button>
+      </nav>
+
+      <section id="tab-home" class="tab active">
+        <div class="home-grid">
+          <div class="arena card" id="arena">
+            <div class="event-banner hidden" id="eventBanner"><b id="eventTitle">ИВЕНТ</b><span id="eventText"></span><span id="eventTimer"></span></div>
+            <div class="combo-box"><span>КОМБО</span><b id="combo">x1.00</b><div class="combo-progress"><div id="comboBar"></div></div></div>
+            <div class="character-wrap">
+              <div class="burst" id="burst"></div>
+              <img id="character" class="character" src="characters/mansur.png" alt="Мансур" draggable="false">
+              <button id="clickTarget" class="click-target" aria-label="Кликнуть по персонажу"><span>ТЫК</span><small>жми яростно</small></button>
+              <div id="floatLayer" class="float-layer" aria-hidden="true"></div>
             </div>
-            <img id="character-image" src="characters/bobik.png" alt="Mansur" class="mansur-click-image">
+            <div class="arena-footer"><div><span>Лучшее комбо</span><b id="bestCombo">x1.00</b></div><div><span>Кликов</span><b id="clicks">0</b></div><div><span>Критов</span><b id="crits">0</b></div></div>
+          </div>
+          <aside class="side-stack">
+            <div class="daily card"><div class="section-title"><div><span class="tiny-label">СЕГОДНЯ</span><h2>Ежедневка</h2></div><span id="dailyStreak" class="pill">🔥 0</span></div><p id="dailyText">Кликни 25 раз.</p><button id="dailyButton" class="btn btn-secondary" disabled>НАГРАДА</button></div>
+            <div class="event-card card"><div class="section-title"><div><span class="tiny-label">СЛУЧАЙНОЕ</span><h2>Мем-событие</h2></div><span id="eventIcon">🎲</span></div><p id="eventDescription">События появляются сами. Следи за ареной.</p><button id="triggerEvent" class="btn btn-secondary">ПРОВЕРИТЬ</button></div>
+            <div class="prestige card"><div class="section-title"><div><span class="tiny-label">ЭНДГЕЙМ</span><h2>Перерождение</h2></div><span>♻️</span></div><p>Сбрось монеты и уровни ради постоянных кристаллов.</p><div class="prestige-row"><b id="prestigePreview">+0 💎</b><button id="prestigeButton" class="btn btn-danger">ПЕРЕРОДИТЬСЯ</button></div></div>
+          </aside>
         </div>
-        <p>Coins: <span id="coin-count">0</span> <img src="textures/money.png" alt="Money" class="money-image"></p>
-        <div id="bubble-container"></div>
-    </div>
+      </section>
 
-    <div class="tabs">
-        <button class="tablinks" onclick="openTab(event, 'upgrades')">Улучшения</button>
-        <button class="tablinks" onclick="openTab(event, 'characters')">Персонажи</button>
-        <button class="tablinks" onclick="openTab(event, 'bonuses')">Бонусы</button>
-    </div>
+      <section id="tab-upgrades" class="tab"><div class="section-title"><div><span class="tiny-label">ДЕРЕВО СИЛЫ</span><h2>Прокачка</h2></div><button id="buyMax" class="btn btn-secondary">КУПИТЬ MAX</button></div><div id="upgrades" class="cards-grid"></div></section>
+      <section id="tab-quests" class="tab"><div class="section-title"><div><span class="tiny-label">ЧЕЛЛЕНДЖИ</span><h2>Задания</h2></div><span class="pill" id="questCount">0/0</span></div><div id="quests" class="cards-grid"></div></section>
+      <section id="tab-collection" class="tab"><div class="section-title"><div><span class="tiny-label">ПЕРСОНАЖИ</span><h2>Коллекция</h2></div><span class="pill" id="collectionCount">0/0</span></div><div id="characters" class="cards-grid"></div></section>
+      <section id="tab-achievements" class="tab"><div class="section-title"><div><span class="tiny-label">ПОЛНЫЙ ТРЕШ</span><h2>Достижения</h2></div><span class="pill" id="achievementCount">0/0</span></div><div id="achievements" class="cards-grid"></div></section>
+    </main>
 
-    <div id="upgrades" class="tabcontent full-screen">
-        <button id="close-upgrades" class="close-button">X</button>
-        <div class="upgrade-container">
-            <div class="upgrade-card">
-                <img src="textures/upgrade1.png" alt="Upgrade 1" class="upgrade-image">
-                <h3>Прокачка клика</h3>
-                <p>Увеличивает монеты за клик на 1.</p>
-                <p>Level: <span id="upgrade1-level">0</span></p>
-                <button id="upgrade1-button" class="upgrade-button">Upgrade (Cost: 10 coins)</button>
-            </div>
-            <div class="upgrade-card">
-                <img src="textures/upgrade2.png" alt="Upgrade 2" class="upgrade-image">
-                <h3>Автоклик</h3>
-                <p>Добавляет 5 монет каждую секунду.</p>
-                <p>Level: <span id="upgrade2-level">0</span></p>
-                <button id="upgrade2-button" class="upgrade-button">Upgrade (Cost: 50 coins)</button>
-            </div>
-            <div class="upgrade-card">
-                <img src="textures/upgrade3.png" alt="Upgrade 3" class="upgrade-image">
-                <h3>Бустер клика</h3>
-                <p>Увеличивает монеты за клик на 10.</p>
-                <p>Level: <span id="upgrade3-level">0</span></p>
-                <button id="upgrade3-button" class="upgrade-button">Upgrade (Cost: 100 coins)</button>
-            </div>
-            <div class="upgrade-card">
-                <img src="textures/upgrade4.png" alt="Upgrade 4" class="upgrade-image">
-                <h3>Ускорение автоклика</h3>
-                <p>Увеличивает монеты от автоклика на 20.</p>
-                <p>Level: <span id="upgrade4-level">0</span></p>
-                <button id="upgrade4-button" class="upgrade-button">Upgrade (Cost: 200 coins)</button>
-            </div>
-        </div>
-    </div>
+    <div id="toastArea" class="toast-area"></div>
+    <div id="modal" class="modal hidden"><div class="modal-backdrop"></div><div class="modal-card card"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+  </div>
 
-<!-- Вкладка персонажей -->
-<div id="characters" class="tabcontent full-screen">
-    <button id="close-characters" class="close-button">X</button>
-    <div class="character-container">
-        <div class="character-card">
-            <img src="characters/bobik.png" alt="Бобик" class="character-image">
-            <h3>Бабиджон</h3>
-            <button id="bobik-button" class="character-button">Выбрать</button>
-        </div>
-        <div class="character-card">
-            <img src="characters/mansur.png" alt="Мансур" class="character-image">
-            <h3>Мансур</h3>
-            <button id="mansur-button" class="character-button">Выбрать</button>
-        </div>
-        <div class="character-card">
-            <img src="characters/vita.png" alt="Дружок" class="character-image">
-            <h3>Дружок</h3>
-            <button id="vita-button" class="character-button">Выбрать</button>
-        </div>
-        <div class="character-card">
-            <img src="characters/slava.png" alt="Спичка" class="character-image">
-            <h3>Спичка</h3>
-            <button id="slava-button" class="character-button">Выбрать</button>
-        </div>
-        <div class="character-card">
-            <img src="characters/genka.png" alt="Генка" class="character-image">
-            <h3>Генка</h3>
-            <button id="genka-button" class="character-button">Выбрать</button>
-        </div>
-             <div class="character-card">
-            <img src="characters/yasen.png" alt="Партия" class="character-image">
-            <h3>Черножопый</h3>
-            <button id="yasen-button" class="character-button">Выбрать</button>
-        </div>
-    </div>
-</div>
-
-
-    <div id="bonuses" class="tabcontent">
-        <h2>Бонусы</h2>
-        <button id="bonus-button" class="bonus-button">Бонус (Cost: 1000 coins)</button>
-    </div>
-
-    <audio id="background-music" src="audio/background.mp3" loop></audio>
-    <audio id="click-sound" src="audio/click.mp3"></audio>
-
-    <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
